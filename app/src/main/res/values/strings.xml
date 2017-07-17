@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">MyChatProgectItem</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_home_text">发现</string>
+    <string name="tab_discover_text">动态</string>
+    <string name="tab_feed_text">好友列表</string>
+    <string name="tab_me_text">我的</string>
+
+    <string name="login">登录</string>
+    <string name="ensure">确定</string>
+    <string name="register">注册</string>
+    <string name="verification">获取验证码</string>
+    <string name="nickname">昵称：</string>
+    <string name="password">密码：</string>
+    <string name="age">年龄：</string>
+    <string name="gender">性别：</string>
+    <string name="location">地址：</string>
+    <string name="intro">介绍：</string>
+
+    <string name="photograph">拍照</string>
+    <string name="uploading">本地上传</string>
+    <string name="head">设置头像</string>
+    <string name="accomplish">完成</string>
+</resources>

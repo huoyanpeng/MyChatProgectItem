@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:background="@color/main_bg_color"
+              android:layout_height="wrap_content">
+
+    <ImageView
+      android:layout_marginBottom="@dimen/height10"
+      android:layout_marginRight="@dimen/height10"
+      android:layout_marginLeft="@dimen/height10"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/indexfragment_stagger"
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+       android:id="@+id/indexfragment_name"
+       android:background="@drawable/background_text_color"
+       android:layout_marginRight="@dimen/height10"
+       android:layout_marginLeft="@dimen/height10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:layout_alignBottom="@id/indexfragment_stagger"/>
+</RelativeLayout>

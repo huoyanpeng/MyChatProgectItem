@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+       <!--android:shape="rectangle">-->
+    <!--<corners android:radius="20dp"></corners>-->
+    <!--<size android:height="20dp" android:width="50dp"></size>-->
+
+<!--</shape>-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle" >
+    <corners android:radius="20dp"></corners>
+    <size android:height="40dp" android:width="60dp"></size>
+    <!-- 设置背景色为红色 -->
+    <solid  android:color="@android:color/holo_red_light"/>
+    <!-- 边框为灰色 -->
+    <stroke android:width="6px"  android:color="@color/TeaGreen"/>
+    <!-- 这里是圆角的半径-->
+    <corners android:radius="4dip" />
+</shape>

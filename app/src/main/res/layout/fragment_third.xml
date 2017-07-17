@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:orientation="vertical"
+             tools:context="test.bwie.com.mychatprogectitem.fragment.ThirdFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height60"
+        android:background="@color/TeaGreen">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好友列表"
+            android:textColor="@color/White"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/post_letter_down"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/height5"/>
+    </RelativeLayout>
+
+</LinearLayout>

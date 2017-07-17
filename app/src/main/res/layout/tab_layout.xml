@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RadioGroup
+        android:id="@+id/tab_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/radiobutton_home"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:button="@null"
+            android:text="@string/tab_home_text"
+            android:textSize="14sp"
+            android:drawableTop="@drawable/discover_selector"/>
+
+        <RadioButton
+            android:textSize="14sp"
+            android:id="@+id/radiobutton_discover"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/tab_discover_text"
+            android:drawableTop="@drawable/dynamic_selector"/>
+        <RadioButton
+            android:textSize="14sp"
+            android:id="@+id/radiobutton_feed"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/tab_feed_text"
+            android:drawableTop="@drawable/mailbox_selector"/>
+        <RadioButton
+            android:textSize="14sp"
+            android:id="@+id/radiobutton_me"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/tab_me_text"
+            android:drawableTop="@drawable/mine_selector"/>
+    </RadioGroup>
+
+
+</LinearLayout>
