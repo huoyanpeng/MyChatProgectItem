@@ -84,6 +84,7 @@ public class SecondFragment extends BaseMvpFragment<SecondFragmentView, SecondFr
         recyclerView.addItemDecoration(build);
 
     }
+
     @Override
     public void registerFailed() {
         MyToast.makeText(getActivity(),"数据请求失败", Toast.LENGTH_LONG);
