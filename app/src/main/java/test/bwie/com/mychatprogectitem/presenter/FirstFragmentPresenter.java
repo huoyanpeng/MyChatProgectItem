@@ -18,12 +18,12 @@ public class FirstFragmentPresenter extends BasePresenter<FirstFragmentView> {
         firstFragmentModel = new FirstFragmentModelImpl();
     }
 
-    public void getData(int page){
+    public void getData(int page,long currttimer){
 
-        firstFragmentModel.getData(page, new FirstFragmentModel.DataListener() {
+        firstFragmentModel.getData(page,currttimer, new FirstFragmentModel.DataListener() {
             @Override
-            public void onSuccess(IndexBean indexBean, int page) {
-                view.success(indexBean,page);
+            public void onSuccess(IndexBean indexBean, int page,long currttimer) {
+                view.success(indexBean,page,currttimer);
             }
 
             @Override

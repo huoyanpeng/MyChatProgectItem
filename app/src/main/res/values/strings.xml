@@ -16,11 +16,19 @@
     <string name="password">密码：</string>
     <string name="age">年龄：</string>
     <string name="gender">性别：</string>
-    <string name="location">地址：</string>
+    <string name="locations">地址：</string>
     <string name="intro">介绍：</string>
 
     <string name="photograph">拍照</string>
     <string name="uploading">本地上传</string>
     <string name="head">设置头像</string>
     <string name="accomplish">完成</string>
+
+    <!--会话界面-->
+    <string name="send">发送</string>
+    <string name="please_to_talk">按住 说话</string>
+    <string name="shot">拍摄</string>
+    <string name="location">位置</string>
+    <string name="red_pack">红包</string>
+    <string name="album">相册</string>
 </resources>

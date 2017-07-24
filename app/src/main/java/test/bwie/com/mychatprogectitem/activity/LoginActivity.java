@@ -1,11 +1,15 @@
 package test.bwie.com.mychatprogectitem.activity;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,6 +19,8 @@ import android.widget.Toast;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +32,7 @@ import butterknife.Unbinder;
 import test.bwie.com.mychatprogectitem.R;
 import test.bwie.com.mychatprogectitem.base.BaseMvpActivity;
 import test.bwie.com.mychatprogectitem.base.IApplication;
+import test.bwie.com.mychatprogectitem.bean.LoginBean;
 import test.bwie.com.mychatprogectitem.bean.RegisterBean;
 import test.bwie.com.mychatprogectitem.cipher.Md5Utils;
 import test.bwie.com.mychatprogectitem.cipher.aes.JNCryptorUtils;
@@ -37,9 +44,11 @@ import test.bwie.com.mychatprogectitem.network.RetrofitManager;
 import test.bwie.com.mychatprogectitem.presenter.LoginPresenter;
 import test.bwie.com.mychatprogectitem.utils.Constants;
 import test.bwie.com.mychatprogectitem.utils.MyToast;
+import test.bwie.com.mychatprogectitem.utils.PreferencesUtils;
 import test.bwie.com.mychatprogectitem.view.FridendView;
+import test.bwie.com.mychatprogectitem.widget.KeyBoardHelper;
 
-public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> {
+public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> implements KeyBoardHelper.OnKeyBoardStatusChangeListener{
 
 
     @BindView(R.id.login_button)
@@ -70,16 +79,21 @@ public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> {
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+        KeyBoardHelper keyBoardHelper = new KeyBoardHelper(this) ;
+        keyBoardHelper.onCreate();
+        keyBoardHelper.setOnKeyBoardStatusChangeListener(this);
+
+
         bind = ButterKnife.bind(this);
         login = getSharedPreferences("login", MODE_PRIVATE);
-        edit = login.edit();
+        this.edit = login.edit();
         mLocationListener = new AMapLocationListener() {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
                 double latitude = aMapLocation.getLatitude();//获取纬度
                 double longitude = aMapLocation.getLongitude();//获取经度
                 System.out.println("latitude:" + latitude + ",,,longitude:" + longitude);
-
             }
         };
 
@@ -93,6 +107,8 @@ public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> {
         String rsaRandomKey =   RsaUtils.getInstance().createRsaSecret(IApplication.getApplication(),randomKey);
         String cipherPhone = JNCryptorUtils.getInstance().encryptData(phone,IApplication.getApplication(),randomKey);
 
+
+
         Map map = new HashMap<>();
         map.put("user.phone",cipherPhone);
         map.put("user.password", Md5Utils.getMD5(pass));
@@ -104,14 +120,43 @@ public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> {
             @Override
             public void onSuccess(String result) {
                 System.out.println("result = " + result);
+
                 Gson gson=new Gson();
-                RegisterBean registerBean = gson.fromJson(result, RegisterBean.class);
-                int result_code = registerBean.getResult_code();
-                if (result_code==200){
+                LoginBean loginBean = gson.fromJson(result, LoginBean.class);
+                int result_code = loginBean.getResult_code();
+                if (result_code==200&&loginBean.getData()!=null){
                     MyToast.makeText(LoginActivity.this,"登录成功", Toast.LENGTH_SHORT);
+
                     Intent intent=new Intent(LoginActivity.this,MessageActivity.class);
+
+
+                    PreferencesUtils.addConfigInfo(IApplication.getApplication(),"yxpassword",loginBean.getData().getPassword());
+                    PreferencesUtils.addConfigInfo(IApplication.getApplication(),"uid",loginBean.getData().getUserId());
+
+
+//                    IApplication.getApplication().emLogin();
+                    int userId = loginBean.getData().getUserId();
+                    String yxpassword = loginBean.getData().getYxpassword();
+                    String imagePath = loginBean.getData().getImagePath();
+
+                    edit.putInt("myuserId",userId);
                     edit.putBoolean("login",true);
+                    edit.putString("myImagePath",imagePath);
                     edit.commit();
+                    EMClient.getInstance().login(userId+"",yxpassword,new EMCallBack() {
+                        //回调
+                        @Override public void onSuccess() {
+                            EMClient.getInstance().groupManager().loadAllGroups();
+                            EMClient.getInstance().chatManager().loadAllConversations();
+                            Log.d("main", "登录聊天服务器成功！"); }
+                        @Override public void onProgress(int progress, String status) {
+
+                        } @Override public void onError(int code, String message) {
+                            Log.d("main", "登录聊天服务器失败！");
+                            Log.d("main", message.toString());                         }
+                    });
+
+
                     startActivity(intent);
                     finish();
                 }
@@ -141,5 +186,16 @@ public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> {
         super.onDestroy();
         bind.unbind();
         finish();
+    }
+
+    @Override
+    public void OnKeyBoardPop(int keyBoardheight) {
+        PreferencesUtils.addConfigInfo(this,"kh",keyBoardheight);
+        System.out.println("keyBoardheight OnKeyBoardPop = " + keyBoardheight);
+    }
+
+    @Override
+    public void OnKeyBoardClose(int oldKeyBoardheight) {
+        System.out.println("keyBoardheight OnKeyBoardClose = " + oldKeyBoardheight);
     }
 }

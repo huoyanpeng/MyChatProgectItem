@@ -9,6 +9,6 @@ import test.bwie.com.mychatprogectitem.bean.IndexBean;
  */
 
 public interface FirstFragmentView {
-    public void success(IndexBean indexBean, int page);
+    public void success(IndexBean indexBean,int page, long currttimer);
     public void failed(int code,int page);
 }

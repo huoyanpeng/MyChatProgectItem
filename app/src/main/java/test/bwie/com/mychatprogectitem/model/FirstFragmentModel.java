@@ -8,10 +8,10 @@ import test.bwie.com.mychatprogectitem.bean.IndexBean;
  * function:
  */
 public interface FirstFragmentModel {
-    public void getData(int page,DataListener dataListener);
+    public void getData(int page,long currttimer,DataListener dataListener);
 
     public interface DataListener{
-        public void onSuccess(IndexBean indexBean, int page);
+        public void onSuccess(IndexBean indexBean, int page,long currttimer);
         public void onFailed(int code,int page);
     }
 

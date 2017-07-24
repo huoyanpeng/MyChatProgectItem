@@ -33,6 +33,15 @@
                     android:layout_centerInParent="true"
                     android:textColor="@color/White"
                     android:textSize="@dimen/height20"/>
+                <Button
+                    android:id="@+id/particulars_button_greet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="打招呼"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/button_background_go"
+                    android:layout_marginRight="@dimen/height10"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"

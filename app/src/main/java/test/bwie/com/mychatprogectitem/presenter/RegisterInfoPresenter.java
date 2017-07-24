@@ -33,6 +33,7 @@ public class RegisterInfoPresenter extends BasePresenter<RegisInfoView> {
         registerInforFragmentModel.getData(phone, nickname, sex, age, area, introduce, password, new ReginterInfoModelImpl.RegisterInforFragmentDataListener() {
             @Override
             public void onSuccess(RegisterBean registerBean) {
+
                 view.registerSuccess(registerBean);
             }
 

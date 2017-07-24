@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -57,6 +58,9 @@ public class ParticularsActivity extends BaseMvpActivity<FridendView,FriendPrese
     @BindView(R.id.button_add_friend)
     Button button_add_friend;
     private int userId;
+    @BindView(R.id.particulars_button_greet)
+    Button button_greet;
+    private boolean falg=false;
 
     @Override
     public FriendPresenter initPresenter() {
@@ -79,6 +83,8 @@ public class ParticularsActivity extends BaseMvpActivity<FridendView,FriendPrese
         dataBean = (DataBean) intent.getSerializableExtra("dataBean");
         Glide.with(this).load(dataBean.getImagePath()).into(image_me);
         initView();
+        String phone = dataBean.getPhone();
+        System.out.println("phone===="+phone);
         age.setText(dataBean.getAge());
         name.setText(dataBean.getNickname());
         nativie.setText(dataBean.getArea());
@@ -118,7 +124,7 @@ public class ParticularsActivity extends BaseMvpActivity<FridendView,FriendPrese
 
     }
 //,R.id.button_add_friend
-    @OnClick({R.id.particulars_image_back,R.id.particulars_image_me})
+    @OnClick({R.id.particulars_image_back,R.id.particulars_image_me,R.id.particulars_button_greet})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.particulars_image_back:
@@ -129,14 +135,25 @@ public class ParticularsActivity extends BaseMvpActivity<FridendView,FriendPrese
                 intent.putExtra("phonoView",dataBean.getImagePath());
                 startActivity(intent);
                 break;
-//            case R.id.button_add_friend:
-//                addFriend();
-//                break;
+            case R.id.particulars_button_greet:
+                if (falg){
+                    Intent intent1=new Intent(this,ChatActivityActivity.class);
+//                    int userId = dataBean.getUserId();
+//                    String nickname = dataBean.getNickname();
+//                    String imagePath = dataBean.getImagePath();
+//                    intent1.putExtra("userId",userId);
+//                    intent1.putExtra("nickname",nickname);
+//                    intent1.putExtra("friendImagPath",imagePath);
+                    startActivity(intent1);
+                }else {
+                   MyToast.makeText(this,"请先添加好友",Toast.LENGTH_LONG);
+                    return;
+                }
+                break;
         }
     }
 
     private void addFriend() {
-
 
         SharedPreferences login = getSharedPreferences("login", MODE_PRIVATE);
         boolean login1 = login.getBoolean("login", false);
@@ -156,8 +173,9 @@ public class ParticularsActivity extends BaseMvpActivity<FridendView,FriendPrese
 
     @Override
     public void registerSuccess(FriendBean registerBean) {
-        String result_message = registerBean.getResult_message();
-        MyToast.makeText(this,result_message, Toast.LENGTH_LONG);
+        MyToast.makeText(this,"添加成功", Toast.LENGTH_LONG);
+        falg=true;
+
     }
 
     @Override

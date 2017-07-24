@@ -20,7 +20,7 @@ import test.bwie.com.mychatprogectitem.bean.UserInfoBean;
  * date: 2017/7/17.
  * function:
  */
-public class UserFriendAdapter extends RecyclerView.Adapter<UserFriendAdapter.MyViewHolder> {
+public class UserFriendAdapter extends RecyclerView.Adapter<UserFriendAdapter.MyViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<UserInfoBean.DataBean> list;
@@ -29,11 +29,26 @@ public class UserFriendAdapter extends RecyclerView.Adapter<UserFriendAdapter.My
         this.context = context;
         this.list = list;
     }
+    //声明接口
+    private UserFriendAdapter.OnItemClickListener mOnItemClickListener = null;
+    //自定义接口
+    public static interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+    //暴露给外面的调用者，定义一个设置Listener的方法（）
+    public void setOnItemClickListener(UserFriendAdapter.OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
 
     @Override
     public UserFriendAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.userfridend_item, parent, false);
         MyViewHolder viewHolder=new MyViewHolder(view);
+
+
+
+        //将创建的View注册点击事件
+        view.setOnClickListener(this);
         return viewHolder;
     }
 
@@ -44,11 +59,22 @@ public class UserFriendAdapter extends RecyclerView.Adapter<UserFriendAdapter.My
           holder.fridend_nickname.setText(list.get(position).getNickname());
           Glide.with(context).load(list.get(position).getImagePath()).error(R.drawable.face_error).into(holder.fridend_face);
 
+
+        //将position保存在itemView的Tag中，以便点击时进行获取
+        holder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list == null ? 0 : list.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取position
+            mOnItemClickListener.onItemClick(view,(int)view.getTag());
+        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

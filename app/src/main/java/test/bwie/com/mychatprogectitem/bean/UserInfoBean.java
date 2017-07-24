@@ -1,5 +1,6 @@
 package test.bwie.com.mychatprogectitem.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class UserInfoBean {
@@ -37,7 +38,7 @@ public class UserInfoBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * area : 安徽省安庆市枞阳县
          * picWidth : 720

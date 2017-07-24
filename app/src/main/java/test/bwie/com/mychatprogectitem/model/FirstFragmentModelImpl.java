@@ -29,11 +29,10 @@ import test.bwie.com.mychatprogectitem.utils.FirstFragmentDaoUtils;
 public class FirstFragmentModelImpl implements FirstFragmentModel {
 
     @Override
-    public void getData(final int page, final DataListener listener) {
+    public void getData(final int page, final long currttimer, final DataListener listener) {
 
         Map<String,String> map = new HashMap<String, String>();
-        long currentTimeMillis = System.currentTimeMillis();
-        map.put("user.currenttimer",currentTimeMillis+"");
+        map.put("user.currenttimer",currttimer+"");
         String sign = JNICore.getSign(SortUtils.getMapResult(map));
         map.put("user.sign", sign);
         RetrofitManager.post(Constants.ALL_USER, map, new BaseObserver() {
@@ -45,7 +44,7 @@ public class FirstFragmentModelImpl implements FirstFragmentModel {
 //                    Gson gson = new Gson();
 //                    IndexBean indexBean =   gson.fromJson(result, IndexBean.class);
 //                    IndexBean jsonBean = FastJsonTools.createJsonBean(result, IndexBean.class);
-                    listener.onSuccess(jsonBean,page);
+                    listener.onSuccess(jsonBean,page,currttimer);
 //                    List<DataBean> data = jsonBean.getData();
 //                    FirstFragmentDaoUtils.insert(data);
                 } catch (JsonSyntaxException e) {

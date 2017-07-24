@@ -1,11 +1,13 @@
 package test.bwie.com.mychatprogectitem.bean;
 
+import java.io.Serializable;
+
 /**
  * author: 霍彦朋 (dell) .
  * date: 2017/7/17.
  * function:
  */
-public class FriendBean {
+public class FriendBean implements Serializable{
 
     /**
      * addUser : {"age":"20","area":"安徽省-安庆市-枞阳县","createtime":1500278161671,"gender":"男","imagePath":"http://qhb.2dyt.com/MyInterface/images/a0114334-f24b-4d26-b8e2-5b9f0a14de2a.jpg","introduce":"dfasfasdfadsfasdf","lasttime":1500278161671,"lat":0,"lng":0,"nickname":"kkkk","password":"e10adc3949ba59abbe56e057f20f883e","phone":"13500000000","picHeight":540,"picWidth":720,"relation":0,"userId":72,"yxpassword":"J861M693"}

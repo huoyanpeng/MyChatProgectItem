@@ -32,7 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:maxLength="11"
-        android:hint="请输入手机号"/>
+        android:hint="请输入手机号"
+        android:inputType="numberPassword"/>
 
     <EditText
         android:id="@+id/login_ed_pass"

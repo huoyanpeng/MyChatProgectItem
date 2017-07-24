@@ -1,10 +1,9 @@
 package test.bwie.com.mychatprogectitem.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.printservice.PrintDocument;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import test.bwie.com.mychatprogectitem.R;
+import test.bwie.com.mychatprogectitem.activity.ChatActivityActivity;
+import test.bwie.com.mychatprogectitem.activity.UserFriendChatActivity;
 import test.bwie.com.mychatprogectitem.adapter.UserFriendAdapter;
 import test.bwie.com.mychatprogectitem.base.BaseMvpFragment;
 import test.bwie.com.mychatprogectitem.bean.FriendBean;
@@ -74,7 +75,7 @@ public class SecondFragment extends BaseMvpFragment<SecondFragmentView, SecondFr
     @Override
     public void registerSuccess(UserInfoBean userInfoBean) {
         MyToast.makeText(getActivity(),"数据请求成功", Toast.LENGTH_LONG);
-        List<UserInfoBean.DataBean> data = userInfoBean.getData();
+        final List<UserInfoBean.DataBean> data = userInfoBean.getData();
         UserFriendAdapter adapter=new UserFriendAdapter(getActivity(),data);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         HorizontalDividerItemDecoration build = new HorizontalDividerItemDecoration.Builder(getActivity()).build();
@@ -82,6 +83,21 @@ public class SecondFragment extends BaseMvpFragment<SecondFragmentView, SecondFr
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(build);
+
+        adapter.setOnItemClickListener(new UserFriendAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                UserInfoBean.DataBean dataBean = data.get(position);
+                Intent intent=new Intent(getActivity(), ChatActivityActivity.class);
+//                int userId = dataBean.getUserId();
+//                String nickname = dataBean.getNickname();
+//                String imagePath = dataBean.getImagePath();
+//                intent.putExtra("nickname",nickname);
+//                intent.putExtra("userId",userId);
+//                intent.putExtra("friendImagPath",imagePath);
+                startActivity(intent);
+            }
+        });
 
     }
 

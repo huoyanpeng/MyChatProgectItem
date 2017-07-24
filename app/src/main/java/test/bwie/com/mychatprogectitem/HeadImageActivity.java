@@ -73,8 +73,6 @@ public class HeadImageActivity extends IActivity {
     Button button_phto;
     @BindView(R.id.haed_text_finish)
     TextView finish;
-//    @BindView(haed_image_title)
-//    ImageView title;
     @BindView(R.id.haed_image_title)
     CircleImageView title;
 

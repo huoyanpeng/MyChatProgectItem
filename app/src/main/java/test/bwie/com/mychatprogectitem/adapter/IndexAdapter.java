@@ -111,7 +111,6 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             verticalViewHolder.indexfragmentNickname.setText(list.get(position).getNickname());
 
-
             verticalViewHolder.indexfragmentDes.setText(list.get(position).getIntroduce());
             Glide.with(context).load(list.get(position).getImagePath()).error(R.drawable.face_error).into(verticalViewHolder.indexfragmentFace);
 

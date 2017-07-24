@@ -4,6 +4,8 @@ package test.bwie.com.mychatprogectitem.model;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,14 +48,32 @@ public class ReginterInfoModelImpl implements ReginterInfoModel {
             @Override
             public void onSuccess(String result) {
                 System.out.println("result:=============="+result.toString());
+                Log.e("result:==============",result.toString());
                 Gson gson = new Gson();
                 RegisterBean registerBean = gson.fromJson(result, RegisterBean.class);
                 if(registerBean.getResult_code() == 200){
                     PreferencesUtils.addConfigInfo(IApplication.getApplication(),"phone",registerBean.getData().getPhone());
                     PreferencesUtils.addConfigInfo(IApplication.getApplication(),"password",registerBean.getData().getPassword());
+                    PreferencesUtils.addConfigInfo(IApplication.getApplication(),"nickname",registerBean.getData().getNickname());
+
                     PreferencesUtils.addConfigInfo(IApplication.getApplication(),"yxpassword",registerBean.getData().getYxpassword());
                     PreferencesUtils.addConfigInfo(IApplication.getApplication(),"uid",registerBean.getData().getUserId());
-                    PreferencesUtils.addConfigInfo(IApplication.getApplication(),"nickname",registerBean.getData().getNickname());
+
+                    final String yxpassword = registerBean.getData().getYxpassword();
+                    final int userId = registerBean.getData().getUserId();
+
+
+                    IApplication.getApplication().emLogin();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                EMClient.getInstance().createAccount(userId+"",yxpassword);
+                            } catch (HyphenateException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
                 }
 
                 listener.onSuccess(registerBean);

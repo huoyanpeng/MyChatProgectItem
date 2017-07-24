@@ -10,6 +10,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.liaoinstan.springview.container.DefaultFooter;
@@ -17,10 +18,15 @@ import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import test.bwie.com.mychatprogectitem.MainThreeActivity;
 import test.bwie.com.mychatprogectitem.R;
+import test.bwie.com.mychatprogectitem.activity.LoginActivity;
 import test.bwie.com.mychatprogectitem.activity.ParticularsActivity;
 import test.bwie.com.mychatprogectitem.adapter.IndexAdapter;
 import test.bwie.com.mychatprogectitem.base.BaseMvpFragment;
@@ -33,6 +39,7 @@ import test.bwie.com.mychatprogectitem.view.FirstFragmentView;
 public class FirstFragment extends BaseMvpFragment<FirstFragmentView, FirstFragmentPresenter> implements FirstFragmentView{
 
     private Unbinder bind;
+    private long currentTimeMillis;
 
     @Override
     public FirstFragmentPresenter initPresenter() {
@@ -49,11 +56,14 @@ public class FirstFragment extends BaseMvpFragment<FirstFragmentView, FirstFragm
     TextView pattern;
     @BindView(R.id.springview_indexfragment)
     SpringView springviewIndexfragment;
+    @BindView(R.id.firstfragment_image_back)
+    ImageView image_back;
     private int page = 1 ;
     private  IndexAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private HorizontalDividerItemDecoration horizontalDividerItemDecoration;
+    List<DataBean> list;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,8 +75,19 @@ public class FirstFragment extends BaseMvpFragment<FirstFragmentView, FirstFragm
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
 
+        image_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), MainThreeActivity.class));
+            }
+        });
+
+        currentTimeMillis = System.currentTimeMillis();
+
+        presenter.getData(0,currentTimeMillis);
+
+        initView();
     }
 
     private void initView() {
@@ -91,7 +112,6 @@ public class FirstFragment extends BaseMvpFragment<FirstFragmentView, FirstFragm
         adapter = new IndexAdapter(getActivity());
         toLinearLayoutManager();
 
-        presenter.getData(page);
 
 
         springviewIndexfragment.setHeader(new DefaultHeader(getActivity()));
@@ -101,14 +121,15 @@ public class FirstFragment extends BaseMvpFragment<FirstFragmentView, FirstFragm
             @Override
             public void onRefresh() {
                 System.out.println("onRefresh = " );
-                page = 1 ;
-                presenter.getData(page);
+                presenter.getData(1,currentTimeMillis);
             }
 
             @Override
             public void onLoadmore() {
                 System.out.println("onLoadmore = " );
-                presenter.getData(++page);
+                long lasttime = list.get(list.size() - 1).getLasttime();
+
+                presenter.getData(1,lasttime);
 
             }
         });
@@ -137,24 +158,24 @@ public class FirstFragment extends BaseMvpFragment<FirstFragmentView, FirstFragm
     }
 
     @Override
-    public void success(final IndexBean indexBean, int page) {
+    public void success(final IndexBean indexBean, int page,long currttimer) {
+
         System.out.println(indexBean.toString());
+        list=indexBean.getData();
         adapter.setData(indexBean,page);
+
         adapter.notifyDataSetChanged();
+
 
         adapter.setOnItemClickListener(new IndexAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (position>20){
-                    position=position-20;
-                }
+
                 Intent intent=new Intent(getActivity(), ParticularsActivity.class);
                 Bundle bundle=new Bundle();
                 DataBean dataBean = indexBean.getData().get(position);
-                int userId = dataBean.getUserId();
                 bundle.putSerializable("dataBean",dataBean);
                 intent.putExtras(bundle);
-                intent.putExtra("userId",userId);
                 getActivity().startActivity(intent);
             }
         });
