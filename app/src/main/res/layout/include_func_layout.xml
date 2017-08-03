@@ -26,11 +26,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ivAlbum"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7.5dp"
                 android:text="@string/album"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:layout_below="@+id/ivAlbum"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/textView2"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -107,6 +107,26 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/ivphones"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/shape_session_func_bg"
+                android:src="@drawable/cellphone_leftdrawer_normal"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivphones"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="7.5dp"
+                android:text="@string/phone"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -1,10 +1,10 @@
 package test.bwie.com.mychatprogectitem.base;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.multidex.MultiDex;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.widget.ImageView;
@@ -12,14 +12,13 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.getkeepsafe.relinker.ReLinker;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMOptions;
-import com.hyphenate.easeui.EaseUI;
 import com.lqr.emoji.IImageLoader;
 import com.lqr.emoji.LQREmotionKit;
-import com.mob.MobApplication;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -28,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.smssdk.SMSSDK;
+import test.bwie.com.mychatprogectitem.R;
 import test.bwie.com.mychatprogectitem.db.DaoMaster;
 import test.bwie.com.mychatprogectitem.db.DaoSession;
 import test.bwie.com.mychatprogectitem.utils.PreferencesUtils;
@@ -53,13 +53,15 @@ public  class IApplication extends MultiDexApplication {
         iApplication=this;
         SMSSDK.initSDK(this,"1f32f83c1f3a8","fbcc7cc99d04da842111213707a2b241");
         CrashReport.initCrashReport(getApplicationContext(), "2e91dbcf2e", true);
-        System.loadLibrary("core");
+//        System.loadLibrary("core");
+//        System.loadLibrary("libspeex");
+        initJNI();
         LeakCanary.install(this);
         initGreendao();
 
         // 如果APP启用了远程的service，此application:onCreate会被调用2次
-// 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
-// 默认的APP会在以包名为默认的process name下运行，如果查到的process name不是APP的process name就立即返回
+        // 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
+        // 默认的APP会在以包名为默认的process name下运行，如果查到的process name不是APP的process name就立即返回
         int pid = android.os.Process.myPid();
         String processAppName = getAppName(pid);
         if (processAppName == null ||!processAppName.equalsIgnoreCase(this.getPackageName())) {
@@ -76,8 +78,6 @@ public  class IApplication extends MultiDexApplication {
         });
 
     }
-
-
 
     public static IApplication getApplication(){
         if(iApplication == null){
@@ -168,6 +168,48 @@ public  class IApplication extends MultiDexApplication {
         });
 
     }
+    public static void ring(){
+        SoundPool soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC,0);
+
+        soundPool.load(iApplication, R.raw.avchat_ring,1);
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(sampleId,1, 1, 0, 0, 1);
+            }
+        });
+
+    }
 
 
+    public static void callTo(){
+        SoundPool soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC,0);
+
+        soundPool.load(iApplication, R.raw.avchat_connecting,1);
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(sampleId,1, 1, 0, 0, 1);
+            }
+        });
+
+
+    }
+    private void initJNI(){
+        System.loadLibrary("core");
+//        System.loadLibrary("speex");
+         ReLinker.loadLibrary(this, "speex", new ReLinker.LoadListener() {
+            @Override
+            public void success() {
+                System.out.println("t =success  ");
+                /* Yay */
+            }
+
+            @Override
+            public void failure(Throwable t) {
+                /* Boo */
+                System.out.println("t =failure  " + t);
+            }
+        });
+    }
 }

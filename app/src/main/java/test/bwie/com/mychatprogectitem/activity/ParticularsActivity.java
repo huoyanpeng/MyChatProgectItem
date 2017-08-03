@@ -46,7 +46,6 @@ public class ParticularsActivity extends BaseMvpActivity<FridendView,FriendPrese
     @BindView(R.id.particulars_linear)
     LinearLayout linearLayouts;
     private DataBean dataBean;
-
     @BindView(R.id.particulars_text_age)
     TextView age;
     @BindView(R.id.particulars_text_name)
@@ -137,13 +136,14 @@ public class ParticularsActivity extends BaseMvpActivity<FridendView,FriendPrese
                 break;
             case R.id.particulars_button_greet:
                 if (falg){
-                    Intent intent1=new Intent(this,ChatActivityActivity.class);
-//                    int userId = dataBean.getUserId();
-//                    String nickname = dataBean.getNickname();
-//                    String imagePath = dataBean.getImagePath();
-//                    intent1.putExtra("userId",userId);
-//                    intent1.putExtra("nickname",nickname);
-//                    intent1.putExtra("friendImagPath",imagePath);
+                    Intent intent1=new Intent(this,UserFriendChatActivity.class);
+                    int userId = dataBean.getUserId();
+                    String nickname = dataBean.getNickname();
+                    String imagePath = dataBean.getImagePath();
+                    intent1.putExtra("num",1);
+                    intent1.putExtra("userId",userId);
+                    intent1.putExtra("nickname",nickname);
+                    intent1.putExtra("friendImagPath",imagePath);
                     startActivity(intent1);
                 }else {
                    MyToast.makeText(this,"请先添加好友",Toast.LENGTH_LONG);

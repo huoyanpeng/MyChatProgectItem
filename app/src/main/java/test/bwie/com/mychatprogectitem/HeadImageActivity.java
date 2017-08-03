@@ -25,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
@@ -56,6 +57,7 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import static test.bwie.com.mychatprogectitem.R.id.haed_button_up;
 import static test.bwie.com.mychatprogectitem.R.id.haed_image_title;
 import static test.bwie.com.mychatprogectitem.utils.ImageResizeUtils.copyStream;
@@ -73,7 +75,7 @@ public class HeadImageActivity extends IActivity {
     Button button_phto;
     @BindView(R.id.haed_text_finish)
     TextView finish;
-    @BindView(R.id.haed_image_title)
+    @BindView(haed_image_title)
     CircleImageView title;
 
     static final int INTENTFORCAMERA = 1 ;
@@ -135,17 +137,18 @@ public class HeadImageActivity extends IActivity {
 
     public void openCamera() {
         HeadImageActivityPermissionsDispatcher.toCameraWithCheck(this);
+
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        HeadImageActivityPermissionsDispatcher.onRequestPermissionsResult(this,requestCode,grantResults);
+        HeadImageActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
     @OnPermissionDenied({Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA})
     public void onDenied(){
-        Toast.makeText(this, "权限被拒绝", Toast.LENGTH_SHORT).show();
 
+        Toast.makeText(this, "权限被拒绝", Toast.LENGTH_SHORT).show();
     }
     /**
      * 打开系统相机
@@ -324,4 +327,5 @@ public class HeadImageActivity extends IActivity {
                 })
                 .show();
     }
+
 }

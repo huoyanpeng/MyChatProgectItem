@@ -126,4 +126,6 @@ public class Constants {
 
 //     user.sign , user.currenttimer
 
+//   9 好友朋友圈
+    public static String FRIEND_CIRCLE="http://localhost:8080/MyInterface/userAction_selectFriends.action?user.sign=1&dynamicinfor.dynamicTime=11111";
 }

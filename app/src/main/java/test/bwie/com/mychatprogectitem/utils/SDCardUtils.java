@@ -1,16 +1,10 @@
 package test.bwie.com.mychatprogectitem.utils;
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.os.StatFs;
-import android.provider.MediaStore;
-
 
 import java.io.File;
 import java.io.IOException;
-
 
 public class SDCardUtils {
 

@@ -88,13 +88,14 @@ public class SecondFragment extends BaseMvpFragment<SecondFragmentView, SecondFr
             @Override
             public void onItemClick(View view, int position) {
                 UserInfoBean.DataBean dataBean = data.get(position);
-                Intent intent=new Intent(getActivity(), ChatActivityActivity.class);
-//                int userId = dataBean.getUserId();
-//                String nickname = dataBean.getNickname();
-//                String imagePath = dataBean.getImagePath();
-//                intent.putExtra("nickname",nickname);
-//                intent.putExtra("userId",userId);
-//                intent.putExtra("friendImagPath",imagePath);
+                Intent intent=new Intent(getActivity(), UserFriendChatActivity.class);
+                int userId = dataBean.getUserId();
+                String nickname = dataBean.getNickname();
+                String imagePath = dataBean.getImagePath();
+                intent.putExtra("num",2);
+                intent.putExtra("nickname",nickname);
+                intent.putExtra("userId",userId);
+                intent.putExtra("friendImagPath",imagePath);
                 startActivity(intent);
             }
         });

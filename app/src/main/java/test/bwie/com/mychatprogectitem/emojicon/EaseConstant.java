@@ -1,4 +1,4 @@
-package test.bwie.com.mychatprogectitem.utils;
+package test.bwie.com.mychatprogectitem.emojicon;
 
 public class EaseConstant {
     public static final String MESSAGE_ATTR_IS_VOICE_CALL = "is_voice_call";

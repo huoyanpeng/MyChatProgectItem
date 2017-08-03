@@ -153,7 +153,8 @@ public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> i
 
                         } @Override public void onError(int code, String message) {
                             Log.d("main", "登录聊天服务器失败！");
-                            Log.d("main", message.toString());                         }
+                            Log.d("main", message.toString());
+                        }
                     });
 
 

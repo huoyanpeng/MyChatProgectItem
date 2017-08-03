@@ -1,4 +1,4 @@
-package test.bwie.com.mychatprogectitem.utils;
+package test.bwie.com.mychatprogectitem.emojicon;
 
 import android.content.Context;
 import android.net.Uri;

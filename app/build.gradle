@@ -47,9 +47,9 @@ android {
 
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
-//        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-//            exclude group: 'com.android.support', module: 'support-annotations'
-//        })
+        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
         //把返回值够造成String，版本号要与retrofit一致
         //城市列表三级联查
         //Rxbinding(对一些控件进行处理)
@@ -94,6 +94,11 @@ android {
         compile 'com.android.support:multidex:1.0.0'
 
         compile 'com.lqr.emoji:library:1.0.2'
+        compile 'com.getkeepsafe.relinker:relinker:1.2.2'
 
     }
+}
+
+dependencies {
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

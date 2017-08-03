@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 用于写入缓存数据到扩展存储卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
@@ -145,9 +146,18 @@
             android:name=".activity.UserFriendChatActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>
-        <activity android:name=".activity.ChatActivityActivity"
-                  android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
+        <activity
+            android:name=".activity.ChatActivityActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>
+        <activity android:name=".activity.VideoActivity">
+        </activity>
+        <activity android:name=".activity.TelActivity" android:launchMode="singleInstance">
+        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
     </application>
 
 </manifest>

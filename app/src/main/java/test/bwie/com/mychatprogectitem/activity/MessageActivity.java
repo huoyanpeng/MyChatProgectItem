@@ -1,6 +1,11 @@
 package test.bwie.com.mychatprogectitem.activity;
 
 
+import android.app.TabActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,11 +14,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.hyphenate.chat.EMClient;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import test.bwie.com.mychatprogectitem.R;
 import test.bwie.com.mychatprogectitem.base.IActivity;
+import test.bwie.com.mychatprogectitem.base.IApplication;
 import test.bwie.com.mychatprogectitem.fragment.FirstFragment;
 import test.bwie.com.mychatprogectitem.fragment.FourthFragment;
 import test.bwie.com.mychatprogectitem.fragment.SecondFragment;
@@ -42,6 +50,33 @@ public class MessageActivity extends IActivity implements ButtomLayout.OnSelectL
         buttomLayout= (ButtomLayout) findViewById(R.id.message_buttomLayout);
         buttomLayout.setOnSelectListenter(this);
         switchFragment(0);
+
+        //监听来电
+        incoming();
+    }
+
+    private void incoming() {
+        CallReceiver callReceiver = new CallReceiver();
+        IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
+        registerReceiver(callReceiver, callFilter);
+    }
+
+
+    private class CallReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // 拨打方username
+            String from = intent.getStringExtra("from");
+            // call type
+            String type = intent.getStringExtra("type");
+            //跳转到通话页面
+            IApplication.ring();
+
+            TelActivity.startTelActivity(type,from,MessageActivity.this);
+
+
+        }
     }
 
     private void switchFragment(int i) {
