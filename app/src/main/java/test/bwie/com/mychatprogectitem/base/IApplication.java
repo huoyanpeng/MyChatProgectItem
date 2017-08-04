@@ -21,6 +21,8 @@ import com.hyphenate.chat.EMOptions;
 import com.lqr.emoji.IImageLoader;
 import com.lqr.emoji.LQREmotionKit;
 import com.mob.MobApplication;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -75,6 +77,12 @@ public  class IApplication extends MultiDexApplication {
                 Glide.with(context).load(path).centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
             }
         });
+        initImageLoader();
+
+    }
+    private void initImageLoader() {
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(configuration);
 
     }
 

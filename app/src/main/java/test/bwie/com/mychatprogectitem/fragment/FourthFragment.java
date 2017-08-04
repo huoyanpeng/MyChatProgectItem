@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import test.bwie.com.mychatprogectitem.MainThreeActivity;
 import test.bwie.com.mychatprogectitem.R;
+import test.bwie.com.mychatprogectitem.activity.FriendsCircleActivity;
 import test.bwie.com.mychatprogectitem.activity.SetActivity;
 import test.bwie.com.mychatprogectitem.adapter.FourFragmentRecycler;
 import test.bwie.com.mychatprogectitem.utils.MyGridSpacingItemDecoration;
@@ -33,14 +34,15 @@ public class FourthFragment extends Fragment {
     @BindView(R.id.fourfragment_recyclerView_one)
     RecyclerView recyclerView;
     private String[] strings={"我的资料","诚信等级","我的相册","我的动态","征友条件",
-                               "设置","会员中心","在线客服","新手福利","帮助&反馈","咪咕有缘阅读会","咪咕音乐会员专区"};
+                               "设置","会员中心","在线客服","新手福利",
+                               "帮助&反馈","咪咕有缘阅读会","咪咕音乐会员专区","朋友圈"};
     private int [] ints={R.drawable.space_center_my_info_bg,R.drawable.space_center_integrity_level_bg,
                            R.drawable.space_center_album_bg,R.drawable.space_center_dynamic_bg,
                            R.drawable.space_center_condition_bg, R.drawable.space_center_setting_bg,
                            R.drawable.space_center_vip_bg,R.drawable.space_center_online_service_bg,
                           R.drawable.space_stern_welfare_bg,R.drawable.space_center_help_bg,
                           R.drawable.space_center_look_book_bg,R.drawable.worth_title_bg,
-                          };
+                          R.drawable.weixinpengyou_popover};
 
 
     @Override
@@ -72,7 +74,10 @@ public class FourthFragment extends Fragment {
         adapter.setOnItemClickListener(new FourFragmentRecycler.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(getActivity(), SetActivity.class));
+                if (strings[position].equals("朋友圈")){
+                    startActivity(new Intent(getActivity(), FriendsCircleActivity.class));
+                }
+//                startActivity(new Intent(getActivity(), SetActivity.class));
             }
         });
     }
