@@ -16,7 +16,7 @@ public class FastJsonTools {
         throw new UnsupportedOperationException("不能被实例化");
     }
 
-    /**TODO 转换成json格式的字符串
+    /**
      * @param object 要转换的对象
      * @return
      */

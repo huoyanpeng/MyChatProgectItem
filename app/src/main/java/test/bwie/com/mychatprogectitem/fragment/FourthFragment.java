@@ -39,7 +39,8 @@ public class FourthFragment extends Fragment {
                            R.drawable.space_center_condition_bg, R.drawable.space_center_setting_bg,
                            R.drawable.space_center_vip_bg,R.drawable.space_center_online_service_bg,
                           R.drawable.space_stern_welfare_bg,R.drawable.space_center_help_bg,
-                          R.drawable.space_center_look_book_bg,R.drawable.worth_title_bg};
+                          R.drawable.space_center_look_book_bg,R.drawable.worth_title_bg,
+                          };
 
 
     @Override

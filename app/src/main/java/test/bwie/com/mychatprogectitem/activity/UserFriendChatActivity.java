@@ -50,7 +50,6 @@ import com.hyphenate.easeui.widget.emojicon.EaseEmojiconMenuBase;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import permissions.dispatcher.RuntimePermissions;
 import test.bwie.com.mychatprogectitem.R;
 import test.bwie.com.mychatprogectitem.adapter.MessageAdapter;
 import test.bwie.com.mychatprogectitem.custom.EditTextPreIme;
@@ -75,8 +73,6 @@ import test.bwie.com.mychatprogectitem.utils.PreferencesUtils;
 import test.bwie.com.mychatprogectitem.utils.SDCardUtils;
 import test.bwie.com.mychatprogectitem.widget.KeyBoardHelper;
 
-import static android.R.attr.bitmap;
-import static android.app.Activity.RESULT_OK;
 import static test.bwie.com.mychatprogectitem.utils.ImageResizeUtils.copyStream;
 
 public class UserFriendChatActivity extends AppCompatActivity implements KeyBoardHelper.OnKeyBoardStatusChangeListener, EditTextPreIme.EditTextListener {

@@ -1,7 +1,6 @@
 package test.bwie.com.mychatprogectitem.activity;
 
 
-import android.app.TabActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

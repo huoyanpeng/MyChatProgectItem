@@ -7,18 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.location.d.j;
-import com.baidu.platform.comapi.map.E;
 import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMLocationMessageBody;
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMVoiceMessageBody;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
 
@@ -28,14 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.bwie.com.mychatprogectitem.R;
 import test.bwie.com.mychatprogectitem.speex.SpeexPlayer;
-import test.bwie.com.mychatprogectitem.utils.GlideCircleTransform;
-
-import static com.baidu.location.d.j.f;
-import static com.baidu.location.d.j.p;
-import static com.baidu.location.d.j.s;
-import static test.bwie.com.mychatprogectitem.R.id.icon_group;
-import static test.bwie.com.mychatprogectitem.R.id.rigth_me_image;
-import static test.bwie.com.mychatprogectitem.R.id.rigth_me_image_title;
 
 /**
  * author: 霍彦朋 (dell) .

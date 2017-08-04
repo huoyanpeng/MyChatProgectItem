@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
 
-import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;

@@ -1,14 +1,15 @@
 package test.bwie.com.mychatprogectitem.base;
 
+
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.widget.ImageView;
-
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -19,6 +20,7 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMOptions;
 import com.lqr.emoji.IImageLoader;
 import com.lqr.emoji.LQREmotionKit;
+import com.mob.MobApplication;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -34,7 +36,6 @@ import test.bwie.com.mychatprogectitem.utils.PreferencesUtils;
 
 import static android.content.ContentValues.TAG;
 
-
 /**
  * author: 霍彦朋 (dell) .
  * date: 2017/6/19.
@@ -45,7 +46,6 @@ public  class IApplication extends MultiDexApplication {
 
     public static IApplication iApplication;
     public static DaoSession daoSession ;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -53,8 +53,7 @@ public  class IApplication extends MultiDexApplication {
         iApplication=this;
         SMSSDK.initSDK(this,"1f32f83c1f3a8","fbcc7cc99d04da842111213707a2b241");
         CrashReport.initCrashReport(getApplicationContext(), "2e91dbcf2e", true);
-//        System.loadLibrary("core");
-//        System.loadLibrary("libspeex");
+
         initJNI();
         LeakCanary.install(this);
         initGreendao();
@@ -78,6 +77,7 @@ public  class IApplication extends MultiDexApplication {
         });
 
     }
+
 
     public static IApplication getApplication(){
         if(iApplication == null){
@@ -197,7 +197,6 @@ public  class IApplication extends MultiDexApplication {
     }
     private void initJNI(){
         System.loadLibrary("core");
-//        System.loadLibrary("speex");
          ReLinker.loadLibrary(this, "speex", new ReLinker.LoadListener() {
             @Override
             public void success() {

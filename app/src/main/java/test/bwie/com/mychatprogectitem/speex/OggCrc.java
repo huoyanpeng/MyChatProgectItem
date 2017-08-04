@@ -73,7 +73,6 @@ package test.bwie.com.mychatprogectitem.speex;
  * @version $Revision: 1.1 $
  */
 public class OggCrc {
-    // TODO - implement java.util.zip.Checksum
 
     /**
      * CRC checksum lookup table
