@@ -128,4 +128,15 @@ public class Constants {
 
 //   9 好友朋友圈
     public static String FRIEND_CIRCLE="http://localhost:8080/MyInterface/userAction_selectFriends.action?user.sign=1&dynamicinfor.dynamicTime=11111";
+
+//    http://localhost:8080/MyInterface/userAction_live.action?user.sign=1&live.type=1
+//
+//    type
+//    1  主播  url
+//    2 获取直播列表   playUrl 查看主播
+//    3 主播关闭房间
+
+
+
+
 }

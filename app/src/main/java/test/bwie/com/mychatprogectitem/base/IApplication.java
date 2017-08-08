@@ -23,6 +23,7 @@ import com.lqr.emoji.LQREmotionKit;
 import com.mob.MobApplication;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.qiniu.pili.droid.streaming.StreamingEnv;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -59,6 +60,9 @@ public  class IApplication extends MultiDexApplication {
         initJNI();
         LeakCanary.install(this);
         initGreendao();
+
+        //七牛直播
+        StreamingEnv.init(getApplicationContext());
 
         // 如果APP启用了远程的service，此application:onCreate会被调用2次
         // 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次

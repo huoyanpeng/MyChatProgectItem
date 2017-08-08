@@ -10,15 +10,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import test.bwie.com.mychatprogectitem.MainThreeActivity;
 import test.bwie.com.mychatprogectitem.R;
+import test.bwie.com.mychatprogectitem.activity.DirectActivity;
 import test.bwie.com.mychatprogectitem.activity.LoginActivity;
 
 
-public class ThirdFragment extends Fragment {
+public class ThirdFragment extends Fragment implements View.OnClickListener{
 
     private View view;
+    private Button share_text;
+    private Button share_streaming;
+
     public ThirdFragment() {
     }
     @Override
@@ -40,5 +45,26 @@ public class ThirdFragment extends Fragment {
             startActivity(new Intent(getActivity(), MainThreeActivity.class));
         }
 
+        initView();
+
+    }
+
+    private void initView() {
+        share_text = (Button) getActivity().findViewById(R.id.fragment_third_share_text);
+        share_streaming = (Button) getActivity().findViewById(R.id.fragment_third_share_streaming);
+
+        share_text.setOnClickListener(this);
+        share_streaming.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.fragment_third_share_streaming:
+                startActivity(new Intent(getActivity(), DirectActivity.class));
+                break;
+            case R.id.fragment_third_share_text:
+                break;
+        }
     }
 }

@@ -2,15 +2,18 @@ package test.bwie.com.mychatprogectitem.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import test.bwie.com.mychatprogectitem.R;
-import test.bwie.com.mychatprogectitem.friendscircle.RecyclerViewExampleActivity;
+import test.bwie.com.mychatprogectitem.friendscircle.adapter.NineGridTest2Adapter;
 import test.bwie.com.mychatprogectitem.friendscircle.model.NineGridTestModel;
-import test.bwie.com.mychatprogectitem.friendscircle.view.ListViewExampleActivity;
 
 public class FriendsCircleActivity extends AppCompatActivity {
 
@@ -28,26 +31,27 @@ public class FriendsCircleActivity extends AppCompatActivity {
             "http://img4.duitang.com/uploads/item/201506/11/20150611000809_yFe5Z.jpeg",
             "http://img5.imgtn.bdimg.com/it/u=1717647885,4193212272&fm=21&gp=0.jpg",
             "http://img5.imgtn.bdimg.com/it/u=2024625579,507531332&fm=21&gp=0.jpg"};
-
+    private Unbinder bind;
+    @BindView(R.id.friends_circle_recyclerView)
+    RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private NineGridTest2Adapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_circle);
+
+        bind = ButterKnife.bind(this);
         initData();
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new NineGridTest2Adapter(this);
+        mAdapter.setList(mList);
+        mRecyclerView.setAdapter(mAdapter);
     }
     private void initData() {
         initListData();
-    }
-
-    public void click(View view) {
-        switch (view.getId()) {
-            case R.id.btn_RecyclerViewExample:
-                RecyclerViewExampleActivity.startActivity(this, mList);
-                break;
-            case R.id.btn_ListViewExample:
-                ListViewExampleActivity.startActivity(this, mList);
-                break;
-        }
     }
 
     private void initListData() {
@@ -58,10 +62,6 @@ public class FriendsCircleActivity extends AppCompatActivity {
         NineGridTestModel model2 = new NineGridTestModel();
         model2.urlList.add(mUrls[4]);
         mList.add(model2);
-//
-//        NineGridTestModel model3 = new NineGridTestModel();
-//        model3.urlList.add(mUrls[2]);
-//        mList.add(model3);
 
         NineGridTestModel model4 = new NineGridTestModel();
         for (int i = 0; i < mUrls.length; i++) {
@@ -94,5 +94,11 @@ public class FriendsCircleActivity extends AppCompatActivity {
             model8.urlList.add(mUrls[i]);
         }
         mList.add(model8);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
     }
 }

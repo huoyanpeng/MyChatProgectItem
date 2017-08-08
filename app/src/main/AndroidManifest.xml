@@ -52,6 +52,11 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- 七牛直播 -->
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <application
         android:name=".base.IApplication"
@@ -159,10 +164,13 @@
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-
         <activity android:name=".activity.FriendsCircleActivity">
         </activity>
-        <activity android:name=".friendscircle.RecyclerViewExampleActivity">
+        <activity android:name=".activity.DirectActivity">
+        </activity>
+        <activity android:name=".qiniu.SWCameraStreamingActivity">
+        </activity>
+        <activity android:name=".qiniu.PLVideoViewActivity">
         </activity>
     </application>
 
