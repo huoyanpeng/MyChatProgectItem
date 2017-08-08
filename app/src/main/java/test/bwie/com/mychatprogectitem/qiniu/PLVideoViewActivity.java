@@ -193,7 +193,6 @@ public class PLVideoViewActivity extends Activity {
                     showToastTips("unknown error !");
                     break;
             }
-            // Todo pls handle the error status here, reconnect or call finish()
             if (isNeedReconnect) {
                 sendReconnectMessage();
             } else {

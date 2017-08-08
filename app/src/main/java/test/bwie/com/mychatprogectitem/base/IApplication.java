@@ -115,7 +115,7 @@ public  class IApplication extends MultiDexApplication {
 
 //        options.setAutoLogin(false);
 //初始化
-        EMClient.getInstance().init(this, options);
+        EMClient.getInstance().init(iApplication, options);
 //        EaseUI.getInstance().init(this, options);
 
 //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
