@@ -117,8 +117,6 @@ public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> i
         RetrofitManager.post(Constants.LOGIN_ACTION, map, new BaseObserver() {
             @Override
             public void onSuccess(String result) {
-                System.out.println("result = " + result);
-
                 Gson gson=new Gson();
                 LoginBean loginBean = gson.fromJson(result, LoginBean.class);
                 int result_code = loginBean.getResult_code();

@@ -38,10 +38,6 @@ public class TelActivity extends AppCompatActivity {
     EMCallSurfaceView surfaceView_one;
     @BindView(R.id.tel_surfaceView_two)
     EMCallSurfaceView  surfaceView_two;
-//    @BindView(R.id.tel_surfaceView_one)
-//    SurfaceView surfaceView_one;
-//    @BindView(R.id.tel_surfaceView_two)
-//    SurfaceView surfaceView_two;
     @BindView(R.id.tel_ring_off_one)
     ImageView ring_off_one;
     @BindView(R.id.tel_ring_off_two)

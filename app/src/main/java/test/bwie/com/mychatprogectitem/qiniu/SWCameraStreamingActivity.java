@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 import test.bwie.com.mychatprogectitem.R;
 
-public class SWCameraStreamingActivity extends Activity implements StreamingStateChangedListener {
+public class SWCameraStreamingActivity extends Activity  implements StreamingStateChangedListener {
     private JSONObject mJSONObject;
     private MediaStreamingManager mMediaStreamingManager;
     private StreamingProfile mProfile;

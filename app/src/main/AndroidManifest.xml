@@ -172,6 +172,8 @@
         </activity>
         <activity android:name=".qiniu.PLVideoViewActivity">
         </activity>
+        <activity android:name=".qiniu.MassActivity">
+        </activity>
     </application>
 
 </manifest>

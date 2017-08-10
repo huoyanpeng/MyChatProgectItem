@@ -120,15 +120,12 @@ public class FirstFragment extends BaseMvpFragment<FirstFragmentView, FirstFragm
         springviewIndexfragment.setListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
-                System.out.println("onRefresh = " );
                 presenter.getData(1,currentTimeMillis);
             }
 
             @Override
             public void onLoadmore() {
-                System.out.println("onLoadmore = " );
                 long lasttime = list.get(list.size() - 1).getLasttime();
-
                 presenter.getData(1,lasttime);
 
             }

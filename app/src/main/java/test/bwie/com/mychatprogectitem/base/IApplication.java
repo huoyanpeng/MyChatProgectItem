@@ -55,14 +55,14 @@ public  class IApplication extends MultiDexApplication {
 
         iApplication=this;
         SMSSDK.initSDK(this,"1f32f83c1f3a8","fbcc7cc99d04da842111213707a2b241");
-        CrashReport.initCrashReport(getApplicationContext(), "2e91dbcf2e", true);
+        CrashReport.initCrashReport(this, "2e91dbcf2e", true);
 
         initJNI();
         LeakCanary.install(this);
         initGreendao();
 
         //七牛直播
-        StreamingEnv.init(getApplicationContext());
+        StreamingEnv.init(this);
 
         // 如果APP启用了远程的service，此application:onCreate会被调用2次
         // 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
@@ -119,7 +119,7 @@ public  class IApplication extends MultiDexApplication {
 //        EaseUI.getInstance().init(this, options);
 
 //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
-//        EMClient.getInstance().setDebugMode(true);
+        EMClient.getInstance().setDebugMode(true);
     }
 
 
