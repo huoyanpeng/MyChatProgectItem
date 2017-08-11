@@ -26,12 +26,15 @@ public class TelActivity extends AppCompatActivity {
     private String uid;
     private String type;
 
+
+
     public static void startTelActivity(String type, String uid, Context context) {
 
         Intent intent = new Intent(context, TelActivity.class);
         intent.putExtra("type", type);
         intent.putExtra("uid", uid);
         context.startActivity(intent);
+        
 
     }
     @BindView(R.id.tel_surfaceView_one)

@@ -136,7 +136,7 @@ public class Constants {
 //    2 获取直播列表   playUrl 查看主播
 //    3 主播关闭房间
 
-    //        message.setAttribute("state", "live"); 表示直播消息
+    //     message.setAttribute("state", "live"); 表示直播消息
 
 //        message.setAttribute("type", "leave"); 离开聊天室
 //        message.setAttribute("type", "join");   加入聊天室

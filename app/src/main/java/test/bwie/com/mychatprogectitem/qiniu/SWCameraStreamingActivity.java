@@ -1,10 +1,14 @@
 package test.bwie.com.mychatprogectitem.qiniu;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.hardware.Camera;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
+import com.hyphenate.chat.EMChatRoom;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.qiniu.pili.droid.streaming.AVCodecType;
 import com.qiniu.pili.droid.streaming.CameraStreamingSetting;
 import com.qiniu.pili.droid.streaming.MediaStreamingManager;
@@ -15,17 +19,46 @@ import com.qiniu.pili.droid.streaming.widget.AspectFrameLayout;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import test.bwie.com.mychatprogectitem.R;
+
+import static android.R.attr.description;
 
 public class SWCameraStreamingActivity extends Activity  implements StreamingStateChangedListener {
     private JSONObject mJSONObject;
     private MediaStreamingManager mMediaStreamingManager;
     private StreamingProfile mProfile;
+    private SharedPreferences login;
+    private List<String> members=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swcamera_streaming);
+        /**
+         * \~chinese
+         * 创建聊天室，聊天室最大人数上限10000。只有特定用户有权限创建聊天室。
+         * @param subject           名称
+         * @param description       描述
+         * @param welcomeMessage    邀请成员加入聊天室的消息
+         * @param maxUserCount      允许加入聊天室的最大成员数
+         * @param members           邀请加入聊天室的成员列表
+         * @return EMChatRoom 聊天室
+         * @throws HyphenateException
+         */
+//        login = getSharedPreferences("login", MODE_PRIVATE);
+//        String nickname = login.getString("nickname", null);
+//        if (nickname==null){
+//            return;
+//        }
+//        try {
+//            EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(nickname, nickname + "主播聊天室", null, 50, members);
+//            String id = chatRoom.getId();
+//        } catch (HyphenateException e) {
+//            e.printStackTrace();
+//        }
         AspectFrameLayout afl = (AspectFrameLayout) findViewById(R.id.cameraPreview_afl);
         // Decide FULL screen or real size
         afl.setShowMode(AspectFrameLayout.SHOW_MODE.FULL);

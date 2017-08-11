@@ -16,4 +16,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center" />
     </com.qiniu.pili.droid.streaming.widget.AspectFrameLayout>
+
+
 </RelativeLayout>

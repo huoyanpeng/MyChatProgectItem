@@ -6,8 +6,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.pili.pldroid.player.AVOptions;
@@ -16,13 +19,12 @@ import com.pili.pldroid.player.widget.PLVideoView;
 
 import test.bwie.com.mychatprogectitem.R;
 import test.bwie.com.mychatprogectitem.qiniu.widget.MediaController;
+import test.bwie.com.mychatprogectitem.widget.KeyBoardHelper;
 
-public class PLVideoViewActivity extends Activity {
+public class PLVideoViewActivity extends Activity implements KeyBoardHelper.OnKeyBoardStatusChangeListener{
 
     private static final String TAG = PLVideoViewActivity.class.getSimpleName();
-
     private static final int MESSAGE_ID_RECONNECTING = 0x01;
-
     private MediaController mMediaController;
     private PLVideoView mVideoView;
     private Toast mToast = null;
@@ -32,6 +34,8 @@ public class PLVideoViewActivity extends Activity {
     private View mLoadingView;
     private View mCoverView = null;
     private int mIsLiveStreaming = 1;
+    //弹幕
+    private LinearLayout linearLayout;
 
     private void setOptions(int codecType) {
         AVOptions options = new AVOptions();
@@ -60,7 +64,6 @@ public class PLVideoViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plvideo_view);
         mVideoView = (PLVideoView) findViewById(R.id.VideoView);
-
         mCoverView = (ImageView) findViewById(R.id.CoverView);
         mVideoView.setCoverView(mCoverView);
         mLoadingView = findViewById(R.id.LoadingView);
@@ -88,6 +91,21 @@ public class PLVideoViewActivity extends Activity {
         // You can also use a custom `MediaController` widget
         mMediaController = new MediaController(this, false, mIsLiveStreaming == 1);
         mVideoView.setMediaController(mMediaController);
+
+        //弹幕
+        linearLayout = (LinearLayout) findViewById(R.id.b_view);
+        keyPop();
+        KeyBoardHelper keyBoardHelper = new KeyBoardHelper(this);
+        keyBoardHelper.onCreate();
+        keyBoardHelper.setOnKeyBoardStatusChangeListener(this);
+    }
+
+    private void keyPop() {
+
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)linearLayout.getLayoutParams() ;
+        params.setMargins(0,0,0,556);
+        params.gravity = Gravity.BOTTOM;
+        linearLayout.setLayoutParams(params);
     }
 
     @Override
@@ -274,5 +292,22 @@ public class PLVideoViewActivity extends Activity {
         mLoadingView.setVisibility(View.VISIBLE);
         mHandler.removeCallbacksAndMessages(null);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(MESSAGE_ID_RECONNECTING), 500);
+    }
+
+    @Override
+    public void OnKeyBoardPop(int keyBoardheight) {
+
+    }
+
+    @Override
+    public void OnKeyBoardClose(int oldKeyBoardheight) {
+        keyClose();
+    }
+
+    private void keyClose() {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)linearLayout.getLayoutParams() ;
+        params.setMargins(0,0,0,40);
+        params.gravity = Gravity.BOTTOM;
+        linearLayout.setLayoutParams(params);
     }
 }

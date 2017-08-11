@@ -134,10 +134,12 @@ public class LoginActivity extends BaseMvpActivity<FridendView,LoginPresenter> i
                     int userId = loginBean.getData().getUserId();
                     String yxpassword = loginBean.getData().getYxpassword();
                     String imagePath = loginBean.getData().getImagePath();
+                    String nickname = loginBean.getData().getNickname();
 
                     edit.putInt("myuserId",userId);
                     edit.putBoolean("login",true);
                     edit.putString("myImagePath",imagePath);
+                    edit.putString("nickname",nickname);
                     edit.commit();
                     EMClient.getInstance().login(userId+"",yxpassword,new EMCallBack() {
                         //回调

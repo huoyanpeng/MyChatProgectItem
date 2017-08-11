@@ -51,7 +51,24 @@
             android:layout_margin="5dp"
             android:onClick="onClickSwitchScreen"
             android:src="@mipmap/ic_switch_screen" />
-
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/b_view"
+        android:visibility="visible"
+        android:gravity="bottom"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/listview"
+            android:background="#FF0000"
+            android:layout_height="100dp"
+            android:layout_width="match_parent" />
+        <test.bwie.com.mychatprogectitem.custom.EditTextPreIme
+            android:id="@+id/edit_query"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </FrameLayout>

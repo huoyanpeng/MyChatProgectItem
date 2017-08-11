@@ -30,7 +30,7 @@ public class MassActivity extends AppCompatActivity {
     private List<MassBean.ListBean> list;
     private List<MassBean.ListBean> massList=new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
-
+    private MassRecycleAdater adater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +38,6 @@ public class MassActivity extends AppCompatActivity {
         initView();
         getGianzhong();
 
-
-        System.out.print("massList=="+massList.size());
-        gridLayoutManager = new GridLayoutManager(this,3);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.addItemDecoration(new MyGridSpacingItemDecoration(20,20,true));
-        MassRecycleAdater adater=new MassRecycleAdater(this,massList);
-        recyclerView.setAdapter(adater);
-
-        adater.setOnItemClickListener(new MassRecycleAdater.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent=new Intent(MassActivity.this,PLVideoViewActivity.class);
-                String publishUrl = massList.get(position).getPlayUrl();
-                intent.putExtra("videoPath",publishUrl);
-                startActivity(intent);
-            }
-        });
     }
 
     private void initView() {
@@ -67,15 +50,30 @@ public class MassActivity extends AppCompatActivity {
         map.put("user.sign", 1 + "");
 
         RetrofitManager.post("http://qhb.2dyt.com/MyInterface/userAction_live.action", map, new BaseObserver() {
+
             @Override
             public void onSuccess(String result) {
                 System.out.println("8888888888888888888888888"+result);
                 Gson gson=new Gson();
                 MassBean massBean = gson.fromJson(result, MassBean.class);
                 list = massBean.getList();
-                massList.addAll(MassActivity.this.list);
-            }
+//                massList.addAll(MassActivity.this.list);
+                gridLayoutManager = new GridLayoutManager(MassActivity.this,3);
+                recyclerView.setLayoutManager(gridLayoutManager);
+                recyclerView.addItemDecoration(new MyGridSpacingItemDecoration(20,20,true));
+                adater = new MassRecycleAdater(MassActivity.this,list);
+                recyclerView.setAdapter(adater);
 
+                adater.setOnItemClickListener(new MassRecycleAdater.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent=new Intent(MassActivity.this,PLVideoViewActivity.class);
+                        String playUrl = list.get(position).getPlayUrl();
+                        intent.putExtra("videoPath",playUrl);
+                        startActivity(intent);
+                    }
+                });
+            }
             @Override
             public void onFailed(int code) {
 
